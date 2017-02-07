@@ -28,7 +28,7 @@ public class CopyLocalFile {
 		 */
 		if (args.length != 2) {
 			System.err
-					.printf("Usage: FileSystemCopyWithProgress <src file> <dst file>\n");
+					.printf("Usage: CopyLocalFile <src file> <dst file>\n");
 			System.exit(-1);
 		}
 
