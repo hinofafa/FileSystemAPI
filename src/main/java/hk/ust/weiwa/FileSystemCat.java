@@ -22,14 +22,20 @@ public class FileSystemCat {
 		 * Validate that one argument is passed from the command line.
 		 */
 		if (args.length != 1) {
-			System.err.printf("Usage: FileSystemCat <input dir>\n");
+			System.err.printf("Usage: FileSystemCat <input file>\n");
 			System.exit(-1);
 		}
 
 		/*
 		 * Get the location of the input file
+		 * URI starting with "file:///" stands for a local file
 		 */
 		String uri = args[0];
+		/*
+		 * A Configuration object encapsulates a client or server's configuration,
+		 * which is set using configuration files read from the classpath, such
+		 * as etc/hadoop/core-site.xml
+		 */
 		Configuration conf = new Configuration();
 		/*
 		 * FileSystem is a general filesystem API, the first step is to retrieve

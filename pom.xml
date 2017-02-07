@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>hk.ust.weiwa</groupId>
-  <artifactId>MyApp</artifactId>
+  <artifactId>FileSystemAPI</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>MyApp</name>
+  <name>FileSystemAPI</name>
   <url>http://maven.apache.org</url>
 
   <properties>
