@@ -14,7 +14,7 @@ import org.apache.hadoop.util.Progressable;
 /*
  * Copy a local file to HDFS with progress
  */
-public class FileCopyWithProgress {
+public class LocalFileCopy {
 
 	/*
 	 * 4 KB buffer
@@ -63,6 +63,8 @@ public class FileCopyWithProgress {
 						System.out.print(".");
 					}
 				});
+		
+		System.out.print("\n");
 
 		/*
 		 * Automatically close the stream after the write finishes.
