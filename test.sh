@@ -6,8 +6,9 @@
 # Run the user program to copy the file
 # Compare the md5sum of the file and its copy
 
-userDomain="hk.ust.comp4651"
+userDomain="hk.ust.weiwa"
 dummyFile="dummy"
+localDir=`pwd`
 
 # Clean up
 clean_up() {
@@ -18,8 +19,10 @@ clean_up() {
 
 clean_up
 # Generate a random file
-head -c 10M < /dev/urandom > $dummyFile
+head -c 100M < /dev/urandom > $dummyFile
 md5sum $dummyFile > md5.txt
+
+rm -f error
 
 # Compile and package to jar
 mvn clean package
@@ -38,8 +41,9 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # Run the user program to copy the file from HDFS back to local disk
-hadoop jar target/FileSystemAPI-1.0-SNAPSHOT.jar $userDomain.CopyFile $dummyFile $dummyFile
-if [ ! -f $dummyFile ]; then
+localCopy="file://$localDir/$dummyFile"
+hadoop jar target/FileSystemAPI-1.0-SNAPSHOT.jar $userDomain.CopyFile $dummyFile $localCopy
+if [ ! -f $localCopy ]; then
 	echo "[ERROR] No file has been copied from HDFS!" >> error
 	clean_up
 	exit 1
@@ -47,7 +51,7 @@ fi
 
 md5sum -c md5.txt
 if [ "$?" -ne 0 ]; then
-	echo "[ERROR] Faild to pass the md5sum check!" >> error
+	echo "[ERROR] md5sum check failed!" >> error
 	clean_up
 	exit 1
 fi
